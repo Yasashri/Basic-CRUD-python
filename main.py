@@ -21,6 +21,14 @@ def get_game(game_id):
         if game['id'] == game_id:
             return game
         return {'error':'Game not found'}
+    
+#Create a new game entry
+@app.route('/games', methods=['POST'])
+def create_game():
+    new_game = {'id':len(games)+1,'title':request.json['title'], 'developer':request.json['developer']}
+    games.appened(new_game)
+    return new_game
+
 #running the API
 if __name__ == '__main__':
     app.run(debug=True)
