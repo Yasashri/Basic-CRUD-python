@@ -10,10 +10,17 @@ games = [
 ]
 
 #Get all games
-app.route('/games', setMethod=['GET'])
+@app.route('/games', methods=['GET'])
 def get_games():
     return games
 
-#running thid API
+#Get one game
+@app.route('/games/<int:game_id>', methods=['GET'])
+def get_game(game_id):
+    for game in games:
+        if game['id'] == game_id:
+            return game
+        return {'error':'Game not found'}
+#running the API
 if __name__ == '__main__':
     app.run(debug=True)
